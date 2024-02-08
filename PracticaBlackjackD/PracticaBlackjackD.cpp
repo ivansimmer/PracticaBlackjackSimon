@@ -120,14 +120,14 @@ void SaleAsCroupier() {
 
     if ((puntuacionCroupier + 11) < 21) {
 
-        cout << "El croupier ha elegido usar el As con 11 puntos";
+        cout << "El croupier ha elegido usar el As con 11 puntos\n";
         puntuacionCroupier = puntuacionCroupier + 11;
 
     }
-    else
-        cout << "El croupier ha elegido usar el As con 1 punto";
-    puntuacionCroupier = puntuacionCroupier + 1;
-
+    else {
+        cout << "El croupier ha elegido usar el As con 1 punto\n";
+        puntuacionCroupier = puntuacionCroupier + 1;
+    }
 }
 
 void SaleAs() {
