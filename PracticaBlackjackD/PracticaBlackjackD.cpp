@@ -3,8 +3,6 @@ using namespace std;
 int puntuacionJugador;
 int puntuacionCroupier;
 
-// la eleccion y puntuacion de las cartas esta bien pero habria que quitar repetidas, añadir carta, añadir fin de juego/outro
-
 void Normas() {
 
     cout << "Las normas del Blackjack son simples, y consisten en lo siguiente: \n";
@@ -37,6 +35,7 @@ void Intro() {
     cout << "Conoces las normas del Blackjack?\n";
     cout << "1 - Si | 2 - No, mejor explicamelas.\n";
     cin >> opcNormas;
+    cout << "\n";
 
     if (opcNormas == 1) {
 
@@ -46,6 +45,8 @@ void Intro() {
     else if (opcNormas == 2) {
 
         Normas();
+        cout << "-------------------------------------------------\n";
+        cout << "\n";
 
     }
     else {
@@ -59,6 +60,7 @@ void Intro() {
     cout << "Conoces el funcionamiento del juego?\n";
     cout << "1 - Si | 2 - No, explicame como va.\n";
     cin >> opcFuncionamiento;
+    cout << "\n";
 
     if (opcFuncionamiento == 1) {
 
@@ -69,6 +71,8 @@ void Intro() {
     else if (opcFuncionamiento == 2) {
 
         Funcionamiento();
+        cout << "----------------------------------------------- \n";
+        cout << "\n";
 
     }
     else {
@@ -81,7 +85,8 @@ void Intro() {
 
     cout << "Con todo lo anterior aclarado, que comience el juego!\n";
     cout << "\n";
-
+    cout << "------------------------------------------------------- \n";
+    cout << "\n";
 }
 
 void EleccionPalos() {
@@ -165,10 +170,24 @@ void LogicaFin() {
         cout << "Felicidades por tu victoria. Nada sienta mejor que ganar a la banca. Aqui te esperamos para la proxima.\n";
         exit(0);
     }
-    else if (puntuacionCroupier == puntuacionJugador) {
+    else if (puntuacionCroupier == 21 && puntuacionJugador) {
         cout << "\n";
         cout << "El croupier te ha igualado los puntos. Hay empate.\n";
-        cout << "Mucha suerte para la proxima vez. En Blackjack Simon todo puede ocurrir.";
+        cout << "Mucha suerte para la proxima vez. En Blackjack Simon todo puede ocurrir.\n";
+        exit(0);
+    }
+    else if (puntuacionCroupier < 22 && puntuacionCroupier > puntuacionJugador) {
+        cout << "\n";
+        cout << "El croupier ha superado tus puntos sin pasarse de 21.\n";
+        cout << "El croupier gana, jugador pierde.\n";
+        cout << "Suerte para la proxima vez. En Blackjack Simon te esperamos\n";
+        exit(0);
+    }
+    else if (puntuacionJugador < 22 && puntuacionJugador > puntuacionCroupier) {
+        cout << "\n";
+        cout << "La puntuacion del croupier es inferior a tus puntos sin pasarse de 21.\n";
+        cout << "El croupier pierde, jugador gana.\n";
+        cout << "Felicidades por la victoria. En Blackjack Simon te esperamos\n";
         exit(0);
     }
 }
@@ -219,11 +238,11 @@ void EleccionCartaCroupier() {
             puntuacionCroupier = puntuacionCroupier + (numCartaCroupier + 1);
 
         }
+        cout << "La puntuacion actual del croupier es: " << puntuacionCroupier << ".\n";
+        cout << "\n";
 
-        if (puntuacionCroupier < 21 || (puntuacionCroupier < puntuacionJugador)) {
+        if (puntuacionCroupier < 21 && (puntuacionCroupier < puntuacionJugador)) {
 
-            cout << "La puntuacion actual del croupier es: " << puntuacionCroupier << ".\n";
-            cout << "\n";
             cout << "El croupier ha cogido otra carta.\n";
             cout << "\n";
             EleccionCartaCroupier();
@@ -292,6 +311,7 @@ void EleccionCartaJugador() {
         }
         else if (opcOtraCarta == 2) {
             cout << "Turno del croupier.\n";
+            cout << "\n";
             EleccionCartaCroupier();
         }
         else {
